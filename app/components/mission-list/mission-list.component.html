@@ -1,0 +1,64 @@
+<div class="mission-list-container">
+  <h1>SpaceX Missions</h1>
+  
+  <app-mission-filter (yearSelected)="onYearFilter($event)"></app-mission-filter>
+  
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+  
+  <div *ngIf="!loading && !error" class="missions-grid">
+    <mat-card *ngFor="let mission of filteredMissions" class="mission-card">
+      <mat-card-header>
+        <div mat-card-avatar class="mission-header-image" 
+             [style.background-image]="'url(' + mission.links.mission_patch_small + ')'"
+             *ngIf="mission.links.mission_patch_small">
+        </div>
+        <mat-card-title>{{ mission.mission_name }}</mat-card-title>
+        <mat-card-subtitle>
+          Flight #{{ mission.flight_number }} | {{ mission.launch_year }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      
+      <img mat-card-image *ngIf="mission.links.flickr_images && mission.links.flickr_images.length" 
+           [src]="mission.links.flickr_images[0]" 
+           alt="{{ mission.mission_name }}">
+      
+      <mat-card-content>
+        <p *ngIf="mission.details">{{ mission.details | slice:0:150 }}{{ mission.details.length > 150 ? '...' : '' }}</p>
+        <p *ngIf="!mission.details">No details available for this mission.</p>
+        
+        <mat-divider class="divider"></mat-divider>
+        
+        <div class="rocket-info">
+          <p><strong>Rocket:</strong> {{ mission.rocket.rocket_name }}</p>
+          <p><strong>Type:</strong> {{ mission.rocket.rocket_type }}</p>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <a mat-button color="primary" [routerLink]="['/mission', mission.flight_number]">
+          <mat-icon>info</mat-icon> DETAILS
+        </a>
+        <a mat-button *ngIf="mission.links.article_link" [href]="mission.links.article_link" target="_blank">
+          <mat-icon>article</mat-icon> ARTICLE
+        </a>
+        <a mat-button *ngIf="mission.links.wikipedia" [href]="mission.links.wikipedia" target="_blank">
+          <mat-icon>language</mat-icon> WIKI
+        </a>
+        <a mat-button *ngIf="mission.links.video_link" [href]="mission.links.video_link" target="_blank">
+          <mat-icon>videocam</mat-icon> VIDEO
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+  <div *ngIf="!loading && !error && filteredMissions.length === 0" class="no-missions">
+    <p>No missions found matching your criteria.</p>
+  </div>
+</div>
+

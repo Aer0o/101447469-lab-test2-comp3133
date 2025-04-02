@@ -1,0 +1,117 @@
+.mission-details-container {
+  padding: 20px 0;
+}
+
+.back-button {
+  margin-bottom: 20px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  padding: 20px;
+}
+
+.mission-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.mission-patch {
+  margin-right: 20px;
+  
+  img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+  
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
+}
+
+.mission-title {
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+.mission-subtitle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  
+  .flight-number, .launch-year {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .launch-success {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    
+    &.success {
+      background-color: #e6f7e6;
+      color: #2e7d32;
+    }
+    
+    &.failure {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+  }
+}
+
+mat-divider {
+  margin-bottom: 20px;
+}
+
+.mission-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.launch-info {
+  margin-top: 15px;
+}
+
+.images-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mission-image {
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+}
+
+.links-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+mat-expansion-panel {
+  margin-top: 15px;
+}
+
